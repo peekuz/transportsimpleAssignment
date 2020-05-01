@@ -1,0 +1,19 @@
+.fromTo {
+    margin: auto;
+    margin-top: 2%;
+    width: 50%;
+    padding: 10px;
+}
+
+.hide {
+    display: none !important;
+    min-height: 0px !important;
+    max-height: 0px !important;
+    height: 0px !important;
+    width: 0px !important;
+    border: 0px !important;
+}
+
+.cdk-overlay-pane .cdk-overlay-connected-position-bounding-box {
+    top: 60px !important;
+}
