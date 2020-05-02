@@ -1,7 +1,7 @@
 <div class="fromTo">
     <mat-form-field style="width: 30%; margin: 1% 16% 6% 2%;" tabindex="-1">
         <mat-label>From</mat-label>
-        <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1">
+        <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1" [(ngModel)]="fromPoint" name="from">
             <input class="fromSearch" tabindex="0" matInput [(ngModel)]='searchValueFrom' placeholder="Search">
             <button tabindex="1" mat-icon-button matSuffix (click)="onKeyFrom(searchValueFrom)" class="cursor-pointer" type="button">
           <mat-icon class="search_icon">search</mat-icon>
@@ -22,7 +22,7 @@
 
     <mat-form-field style="width: 30%;" tabindex="-1">
         <mat-label>To</mat-label>
-        <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1">
+        <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1" [(ngModel)]="toPoint" name="to">
             <input class="fromSearch" matInput [(ngModel)]='searchValueTo' placeholder="Search">
             <button mat-icon-button matSuffix (click)="onKeyTo(searchValueTo)" class="cursor-pointer" type="button">
         <mat-icon class="search_icon">search</mat-icon>
@@ -32,7 +32,7 @@
             <button class="corructbtn" mat-icon-button matSuffix (click)="addPlaceTo(newToPlace)" [ngClass]="{ 'hide': showAddTo }" class="cursor-pointer" type="button" style=" right: 13%;">
           <mat-icon class="search_icon">done</mat-icon>
           </button>
-            <button class="closebtn" mat-icon-button matSuffix (click)="newToPlace=''" [ngClass]="{ 'hide': showAddTo }" class="cursor-pointer" type="button">
+            <button class="closebtn" mat-icon-button matSuffix (click)="newToPlace=''" [ngClass]="{ 'hide': showAddTo }" type="button">
             <mat-icon class="search_icon">close</mat-icon>
             </button>
             <mat-option>None</mat-option>
@@ -40,9 +40,12 @@
         </mat-select>
     </mat-form-field>
 
+
+    <button mat-icon-button matSuffix (click)="addTrip()" class="AddTrip" type="button">AddTrip
+      </button>
 </div>
 
 
-
+<canvas #canvas width="600" height="300"></canvas>
 
 <router-outlet></router-outlet>
