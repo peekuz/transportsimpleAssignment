@@ -22,7 +22,7 @@
 
     <mat-form-field style="width: 30%;" tabindex="-1">
         <mat-label>To</mat-label>
-        <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1" [(ngModel)]="toPoint" name="to">
+        <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1" [(ngModel)]="toPoint" name="food">
             <input class="fromSearch" matInput [(ngModel)]='searchValueTo' placeholder="Search">
             <button mat-icon-button matSuffix (click)="onKeyTo(searchValueTo)" class="cursor-pointer" type="button">
         <mat-icon class="search_icon">search</mat-icon>
@@ -46,6 +46,6 @@
 </div>
 
 
-<canvas #canvas width="600" height="300"></canvas>
+<canvas #canvas id="canvas" width="600" height="300"></canvas>
 
 <router-outlet></router-outlet>
