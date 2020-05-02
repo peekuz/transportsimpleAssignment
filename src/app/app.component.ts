@@ -10,7 +10,8 @@ export class AppComponent {
   //   this.agencyDD.splice( 0, 0, { agency: 'None' } );
   searchValueFrom:string=""
   searchValueTo:string=""
-  showAdd:boolean=true;
+  showAddFrom:boolean=true;
+  showAddTo:boolean=true;
   newFromPlace=""
   newToPlace=""
   states: string[] = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware'  ];

@@ -2,20 +2,16 @@
     <mat-form-field style="width: 30%; margin: 1% 16% 6% 2%;" tabindex="-1">
         <mat-label>From</mat-label>
         <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1">
-            <input tabindex="0" matInput [(ngModel)]='searchValueFrom' placeholder="Search" style="margin: 3% 3% 3% 4%;
-            background: white;
-            height: 35px;
-            width: 90%;">
-            <button tabindex="1" mat-icon-button matSuffix (click)="onKeyFrom(searchValueFrom)" class="cursor-pointer" type="button" style="float: right;position: absolute; right: 9px;
-            margin: 3% 2% 1% 1%">
+            <input class="fromSearch" tabindex="0" matInput [(ngModel)]='searchValueFrom' placeholder="Search">
+            <button tabindex="1" mat-icon-button matSuffix (click)="onKeyFrom(searchValueFrom)" class="cursor-pointer" type="button">
           <mat-icon class="search_icon">search</mat-icon>
         </button>
-            <button tabindex="2" mat-button (click)="showAdd=!showAdd" style="width: 100%;text-align: left;"><mat-icon>add</mat-icon>   Add New</button>
-            <input tabindex="3" matInput [ngClass]="{ 'hide':  showAdd}" [(ngModel)]='newFromPlace' placeholder="add" style="height: 35px; background-color: #f3f5f8; width: 90%;  position: inherit; margin: 3% 3% 3% 4% ">
-            <button tabindex="4" mat-icon-button matSuffix (click)="addPlaceFrom(newFromPlace)" [ngClass]="{ 'hide': showAdd }" class="cursor-pointer" type="button" style="float: right; position: absolute; right: 13%;margin: 3% 0% 0% 0%;">
+            <button class="Addnewbtn" tabindex="2" mat-button (click)="showAddFrom=!showAddFrom"><mat-icon>add</mat-icon>   Add New</button>
+            <input class="Addnewinput" tabindex="3" matInput [ngClass]="{ 'hide':  showAddFrom}" [(ngModel)]='newFromPlace' placeholder="add">
+            <button class="corructbtn" tabindex="4" mat-icon-button matSuffix (click)="addPlaceFrom(newFromPlace)" [ngClass]="{ 'hide': showAddFrom }" class="cursor-pointer" type="button" style=" right: 13%;">
             <mat-icon class="search_icon">done</mat-icon>
             </button>
-            <button tabindex="5" mat-icon-button matSuffix (click)="newFromPlace=''" [ngClass]="{ 'hide': showAdd }" class="cursor-pointer" type="button" style="float: right; position: absolute; right: 2%;margin: 3% 1% 1% 0%;">
+            <button class="closebtn" tabindex="5" mat-icon-button matSuffix (click)="newFromPlace=''" [ngClass]="{ 'hide': showAddFrom }" class="cursor-pointer" type="button">
               <mat-icon class="search_icon">close</mat-icon>
               </button>
             <mat-option>None</mat-option>
@@ -27,20 +23,16 @@
     <mat-form-field style="width: 30%;" tabindex="-1">
         <mat-label>To</mat-label>
         <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1">
-            <input matInput [(ngModel)]='searchValueTo' placeholder="Search" style="margin: 3% 3% 3% 4%;
-            background: white;
-            height: 35px;
-            width: 90%;">
-            <button mat-icon-button matSuffix (click)="onKeyTo(searchValueTo)" class="cursor-pointer" type="button" style="float: right;position: absolute; right: 9px;
-            margin: 3% 2% 1% 1%">
+            <input class="fromSearch" matInput [(ngModel)]='searchValueTo' placeholder="Search">
+            <button mat-icon-button matSuffix (click)="onKeyTo(searchValueTo)" class="cursor-pointer" type="button">
         <mat-icon class="search_icon">search</mat-icon>
       </button>
-            <button mat-button (click)="showAdd=!showAdd" style="width: 100%;text-align: left;"><mat-icon>add</mat-icon>   Add New</button>
-            <input matInput [ngClass]="{ 'hide':  showAdd}" [(ngModel)]='newToPlace' placeholder="add" style="height: 35px; background-color: #f3f5f8; width: 90%;  position: inherit; margin: 3% 3% 3% 4% ">
-            <button mat-icon-button matSuffix (click)="addPlaceTo(newToPlace)" [ngClass]="{ 'hide': showAdd }" class="cursor-pointer" type="button" style="float: right; position: absolute; right: 13%;margin: 3% 0% 0% 0%;">
+            <button class="Addnewbtn" mat-button (click)="showAddTo=!showAddTo" style="width: 100%;text-align: left;"><mat-icon>add</mat-icon>   Add New</button>
+            <input class="Addnewinput" matInput [ngClass]="{ 'hide':  showAddTo}" [(ngModel)]='newToPlace' placeholder="add">
+            <button class="corructbtn" mat-icon-button matSuffix (click)="addPlaceTo(newToPlace)" [ngClass]="{ 'hide': showAddTo }" class="cursor-pointer" type="button" style=" right: 13%;">
           <mat-icon class="search_icon">done</mat-icon>
           </button>
-            <button mat-icon-button matSuffix (click)="newToPlace=''" [ngClass]="{ 'hide': showAdd }" class="cursor-pointer" type="button" style="float: right; position: absolute; right: 2%;margin: 3% 1% 1% 0%;">
+            <button class="closebtn" mat-icon-button matSuffix (click)="newToPlace=''" [ngClass]="{ 'hide': showAddTo }" class="cursor-pointer" type="button">
             <mat-icon class="search_icon">close</mat-icon>
             </button>
             <mat-option>None</mat-option>
