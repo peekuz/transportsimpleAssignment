@@ -45,7 +45,8 @@
       </button>
 </div>
 
+<div #canvasWrapper class="canvas-wrapper">
 
-<canvas #canvas id="canvas" width="600" height="300"></canvas>
-
+    <canvas #canvas id="canvas" [height]="canvasWrapper.offsetHeight" [width]="canvasWrapper.offsetWidth"></canvas>
+</div>
 <router-outlet></router-outlet>

@@ -1,3 +1,9 @@
+.canvas-wrapper {
+    width: 94%;
+    height: 500px;
+    margin: auto;
+}
+
 .fromTo {
     margin: auto;
     margin-top: 2%;
