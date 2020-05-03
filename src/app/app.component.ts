@@ -16,17 +16,18 @@ export class AppComponent {
   toPoint = ""
   lastfromPoint = ""
   lasttoPoint = ""
-  x: number = 40;
-  y: number = 100;
+  x: number = 20;
+  y: number = 40;
+  level2: boolean = false;
+  prev_level2: boolean = false;
+  discontinuos_travel: boolean = false;
   states: string[] = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware'];
-  colors: string[] = ['green', 'blue', '#8C9904', '#575F02', '#69BB06', '#467F02', '#02507F', '#08027F', '#3B027F', '#2C025F', '#48025F', '#380146']
-  levelTwoFlag: boolean = true;
-  colorIndex: number = 0;
   selectedFromplaces = [...this.states]
   selectedToplaces = [...this.states]
 
   @ViewChild('canvas')
   canvas: ElementRef<HTMLCanvasElement>;
+
   private ctx: CanvasRenderingContext2D;
 
   ngOnInit(): void {
@@ -67,116 +68,140 @@ export class AppComponent {
     this.fromPoint = from
 
   }
+
+  drawcircle() {
+    this.ctx.beginPath();
+    this.ctx.arc(this.x, this.y, 5, 0, 2 * Math.PI);
+    this.ctx.fillText(this.fromPoint.slice(0, 3) + "-" + this.toPoint.slice(0, 3), this.x - 20, this.y + 20);
+    this.ctx.stroke();
+    this.x = this.x + 5;
+  }
+  drawline(x_len, y_len) {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.x, this.y);
+    this.ctx.lineWidth = 2;
+    this.ctx.lineCap = 'round';
+
+    this.x = this.x + x_len;
+    this.y = this.y + y_len;
+    this.ctx.lineTo(this.x, this.y);
+    this.x = this.x + 5;
+    this.ctx.stroke();
+  }
+  drawarrowline(x_len, y_len, ang) {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.x, this.y);
+    this.ctx.lineWidth = 2;
+    this.ctx.lineCap = 'round';
+
+    this.x = this.x + x_len;
+    this.y = this.y + y_len;
+    this.ctx.lineTo(this.x, this.y);
+    this.x = this.x + 5;
+    this.ctx.stroke();
+
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.x, this.y);
+    this.ctx.lineTo(this.x - 12, this.y - 5);
+    this.ctx.lineTo(this.x - 12, this.y + 5);
+    this.ctx.closePath();
+    this.ctx.fill();
+    this.x = this.x + 5;
+
+
+
+  }
   addTrip() {
-    this.colorIndex = this.colorIndex + 1;
-    this.colorIndex = this.colorIndex % this.colors.length;
     if (this.lastfromPoint == "" && this.lasttoPoint == "") {
-      this.ctx.beginPath();
-      this.ctx.arc(this.x, this.y, 5, 0, 2 * Math.PI);
-      this.ctx.fillText(this.fromPoint.substring(0,3).toUpperCase()  + "-" + this.toPoint.substring(0,3).toUpperCase() , this.x - 20, this.y + 20);
-
-      this.ctx.fillStyle = this.colors[this.colorIndex];
-      this.ctx.strokeStyle = this.colors[this.colorIndex];
-      this.ctx.fill()
-      //this.ctx.fill("#ff0000");
-      this.ctx.stroke();
-      this.x = this.x + 5;
+      this.drawcircle()
     }
-    else if (this.lasttoPoint == this.fromPoint && (this.lastfromPoint != this.fromPoint && this.lasttoPoint != this.toPoint)) {
-
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.x, this.y);
-      this.ctx.lineWidth = 2;
-      this.ctx.lineCap = 'round';
-
-      this.x = this.x + 80;
-      this.ctx.lineTo(this.x, this.y);
-      this.x = this.x + 5;
-      this.ctx.stroke();
-
-      this.ctx.beginPath();
-      this.ctx.arc(this.x, this.y, 5, 0, 2 * Math.PI);
-      this.ctx.fillStyle = this.colors[this.colorIndex];
-      this.ctx.strokeStyle = this.colors[this.colorIndex];
-      this.ctx.fill()
-      this.ctx.fillText(this.fromPoint.substring(0,3).toUpperCase()  + "-" + this.toPoint.substring(0,3).toUpperCase() , this.x - 10, this.y + 20);
-      this.ctx.stroke();
-      this.x = this.x + 5;
-    }
-    else if ((this.lasttoPoint != this.fromPoint && (this.lastfromPoint != this.fromPoint && this.lasttoPoint != this.toPoint))) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.x, this.y);
-      this.ctx.lineWidth = 2;
-      this.ctx.lineCap = 'round';
-
-      this.x = this.x + 80;
-      this.ctx.lineTo(this.x, this.y);
-      this.x = this.x + 5;
-      this.ctx.stroke();
-
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.x, this.y);
-      this.ctx.lineTo(this.x - 12, this.y - 5);
-      this.ctx.lineTo(this.x - 12, this.y + 5);
-      this.ctx.closePath();
-      this.ctx.fill();
-      this.x = this.x + 5;
-
-
-      this.ctx.beginPath();
-      this.ctx.arc(this.x, this.y, 5, 0, 2 * Math.PI);
-      this.ctx.fillText(this.fromPoint.substring(0,3).toUpperCase()  + "-" + this.toPoint.substring(0,3).toUpperCase() , this.x - 10, this.y + 20);
-      this.ctx.stroke();
-      this.x = this.x + 5;
-    }
-    else if (this.lastfromPoint == this.fromPoint && this.lasttoPoint == this.toPoint) {
-      if (this.levelTwoFlag){
-        this.ctx.clearRect(this.x-12, this.y-6, 20, 15);
-        this.ctx.clearRect(this.x-10, this.y+10, 100, 40);
-        this.x = this.x + 60;
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y - 50, 5, 0, 2 * Math.PI);
-        this.ctx.fillText(this.lastfromPoint.substring(0,3).toUpperCase()  + "-" + this.lasttoPoint.substring(0,3).toUpperCase() , this.x - 20, this.y - 20);
-        this.ctx.strokeStyle = "#ff0000"
-        this.ctx.fillStyle = "#FF0000";
-        this.ctx.stroke();
-        this.x = this.x + 5;
-        this.levelTwoFlag=false;
+    else if (this.lastfromPoint === this.fromPoint && this.lasttoPoint === this.toPoint) {
+      //this.ctx.clearRect(this.x -75,this.y,80,50);
+      //this.ctx.beginPath();
+      if (!this.level2 && !this.prev_level2) {
+        if (this.lastfromPoint != "" && this.lasttoPoint != "") {
+          this.ctx.clearRect(this.x - 90, this.y - 10, 95, 20)
+          this.ctx.clearRect(this.x - 30, this.y, 60, 30)
+          this.x = this.x - 90;
+        }
+        if (!this.discontinuos_travel) {
+          this.drawline(80, 80);
+          this.drawcircle();
+          this.drawline(80, 0);
+          this.drawcircle();
+        }
+        else {
+          this.drawline(80, 80);
+          this.drawcircle();
+          this.drawline(80, 0);
+          this.drawcircle();
+          this.discontinuos_travel = false;
+        }
+        this.level2 = true;
+        this.prev_level2 = true;
       }
-        this.x = this.x + 60;
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y - 50, 5, 0, 2 * Math.PI);
-        this.ctx.fillText(this.fromPoint.substring(0,3).toUpperCase() + "-" + this.toPoint.substring(0,3).toUpperCase() , this.x - 20, this.y - 20);
-        this.ctx.strokeStyle = "#ff0000"
-        this.ctx.fillStyle = "#FF0000";
-        this.ctx.stroke();
-        this.x = this.x + 5;
-        
+      else if (!this.level2 && this.prev_level2) {
+        this.ctx.clearRect(this.x - 90, this.y - 10, 95, 90)
+        this.ctx.clearRect(this.x - 30, this.y, 60, 30)
+        this.x = this.x - 90;
+        this.y = this.y + 80;
+
+        if (!this.discontinuos_travel) {
+          this.drawline(80, 0);
+          this.drawcircle();
+          this.drawline(80, 0);
+          this.drawcircle();
+        }
+        else {
+          this.drawarrowline(80, 0, 0);
+          this.drawcircle();
+          this.drawline(80, 0);
+          this.drawcircle();
+          this.discontinuos_travel = false;
+        }
+        this.level2 = true;
+        this.prev_level2 = false;
+
+
+      }
+      else {
+        this.drawline(80, 0);
+        this.drawcircle()
+      }
+
     }
-
-
-    // this.ctx.beginPath();
-    // this.ctx.moveTo(100, 100);
-    // this.ctx.lineTo(88,95 );
-    // this.ctx.lineTo(88,105);
-    // this.ctx.closePath();
-    // this.ctx.fill();
-    // console.log(this.fromPoint,this.toPoint)
-    // this.ctx.beginPath();
-    // this.ctx.moveTo(20, 20);
-    // this.ctx.lineWidth = 2;
-    // this.ctx.lineCap = 'round';
-    // this.ctx.fillText(this.fromPoint+"-"+this.toPoint,100, 30);
-
-    // this.ctx.lineTo(100, 20);
-    // this.ctx.stroke();
-
-    // this.ctx.beginPath();
-    // this.ctx.arc(105, 20,5,0,2*Math.PI);
-    // this.ctx.stroke();
-
+    else if (this.lasttoPoint === this.fromPoint) {
+      if (!this.level2) {
+        this.drawline(80, 0);
+        this.drawcircle();
+        if (this.prev_level2) {
+          this.prev_level2 = false;
+        }
+      } else {
+        this.drawline(80, -80);
+        this.drawcircle();
+        this.level2 = false
+        this.prev_level2 = true;
+      }
+    }
+    else if (this.lasttoPoint !== this.fromPoint) {
+      this.discontinuos_travel = true;
+      if (!this.level2) {
+        this.drawarrowline(80, 0, 0)
+        this.drawcircle();
+        if (this.prev_level2) {
+          this.prev_level2 = false;
+        }
+      } else {
+        this.drawline(80, -80);
+        this.drawcircle();
+        this.level2 = false;
+        this.prev_level2 = true;
+      }
+    }
     this.lastfromPoint = this.fromPoint
     this.lasttoPoint = this.toPoint
-    this.ctx.clearRect(0, 0, 2, 2);
   }
+
+
 }
