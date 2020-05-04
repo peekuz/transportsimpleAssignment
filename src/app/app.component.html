@@ -2,9 +2,9 @@
     <div class="fromTo">
         <mat-form-field style="width: 30%; margin: 1% 16% 6% 2%;">
             <mat-label>From</mat-label>
-            <mat-select disableOptionCentering panelClass="myPanelClass" style="margin-top:10% ;" [(ngModel)]="fromPoint" name="from">
-                <input class="fromSearch" tabindex="0" matInput [(ngModel)]='searchValueFrom' placeholder="Search" (keydown)="$event.stopPropagation()">
-                <button tabindex="1" mat-icon-button matSuffix (click)="onKeyFrom(searchValueFrom)" class="cursor-pointer" type="button">
+            <mat-select disableOptionCentering panelClass="myPanelClass" style="margin-top:10% ;" [(ngModel)]="fromPoint" name="from" required>
+                <input class="fromSearch" tabindex="0" matInput [(ngModel)]='searchValueFrom' (keyup)="onKeyFrom(searchValueFrom)" placeholder="Search" (keydown)="$event.stopPropagation()">
+                <button tabindex="1" mat-icon-button matSuffix class="cursor-pointer" type="button">
           <mat-icon class="search_icon">search</mat-icon>
         </button>
                 <button class="Addnewbtn" tabindex="2" mat-button (click)="showAddFrom=!showAddFrom"><mat-icon>add</mat-icon>   Add New</button>
@@ -23,9 +23,9 @@
 
         <mat-form-field style="width: 30%;margin-right: 9%;">
             <mat-label>To</mat-label>
-            <mat-select panelClass="fromSelect" style="margin-top:10% ;" [(ngModel)]="toPoint" name="food">
-                <input class="fromSearch" matInput [(ngModel)]='searchValueTo' placeholder="Search">
-                <button mat-icon-button matSuffix (click)="onKeyTo(searchValueTo)" class="cursor-pointer" type="button">
+            <mat-select panelClass="fromSelect" style="margin-top:10% ;" [(ngModel)]="toPoint" name="food" required>
+                <input class="fromSearch" matInput [(ngModel)]='searchValueTo' placeholder="Search" (keyup)="onKeyTo(searchValueTo)">
+                <button mat-icon-button matSuffix class="cursor-pointer" type="button">
         <mat-icon class="search_icon">search</mat-icon>
       </button>
                 <button class="Addnewbtn" mat-button (click)="showAddTo=!showAddTo" style="width: 100%;text-align: left;"><mat-icon>add</mat-icon>   Add New</button>
@@ -47,7 +47,7 @@
     </div>
 
 
-    <div style="width: 100%;">
-        <canvas #canvas id="canvas" width="1200"></canvas>
+    <div style="width: 100%; right: 10px;">
+        <canvas #canvas id="canvas" width="1200" height="250"></canvas>
     </div>
 </div>

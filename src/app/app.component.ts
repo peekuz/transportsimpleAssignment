@@ -6,35 +6,33 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  searchValueFrom: string = ""
-  searchValueTo: string = ""
+  searchValueFrom: string = "";
+  searchValueTo: string = "";
   showAddFrom: boolean = true;
   showAddTo: boolean = true;
-  newFromPlace = ""
-  newToPlace = ""
-  fromPoint = ""
-  toPoint = ""
-  lastfromPoint = ""
-  lasttoPoint = ""
+  newFromPlace = "";
+  newToPlace = "";
+  fromPoint = "";
+  toPoint = "";
+  lastfromPoint = "";
+  lasttoPoint = "";
   x: number = 40;
   y: number = 100;
   level2: boolean = false;
   prev_level2: boolean = false;
   discontinuos_travel: boolean = false;
   states: string[] = ['Malappuram', 'Palakkad', 'Coimbatore', 'Bangalore', 'Delhi', 'Shornur', 'Chennai', 'Mangalore'];
-  selectedFromplaces = [...this.states]
-  selectedToplaces = [...this.states]
-  colors: string[] = ['green', 'blue', '#8C9904', '#575F02', '#69BB06', '#467F02', '#02507F', '#08027F', '#3B027F', '#2C025F', '#48025F', '#380146']
+  selectedFromplaces = [...this.states];
+  selectedToplaces = [...this.states];
+  colors: string[] = ['green', 'blue', '#8C9904', '#575F02', '#69BB06', '#467F02', '#02507F', '#08027F', '#3B027F', '#2C025F', '#48025F', '#380146'];
   colorIndex: number = 0;
-  @ViewChild('canvas')
-  canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement>;
 
   private ctx: CanvasRenderingContext2D;
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
-   this. ctx.canvas.width  = window.innerWidth;
-   this. ctx.canvas.height = window.innerHeight;
+   
   }
 
   constructor() {
@@ -54,21 +52,21 @@ export class AppComponent {
   }
 
   addPlaceFrom(newPlace) {
-    this.states.push(newPlace)
+    this.states.push(newPlace);
     // this.onKeyFrom("")
-    this.selectedFromplaces = [...this.states]
-    this.selectedToplaces = [...this.states]
-    this.searchValueFrom = ""
-    this.newFromPlace = ""
+    this.selectedFromplaces = [...this.states];
+    this.selectedToplaces = [...this.states];
+    this.searchValueFrom = "";
+    this.newFromPlace = "";
 
   }
   addPlaceTo(newPlace) {
-    this.states.push(newPlace)
-    this.selectedToplaces = [...this.states]
-    this.selectedFromplaces = [...this.states]
+    this.states.push(newPlace);
+    this.selectedToplaces = [...this.states];
+    this.selectedFromplaces = [...this.states];
     // this.onKeyTo("")
-    this.searchValueTo = ""
-    this.newToPlace = ""
+    this.searchValueTo = "";
+    this.newToPlace = "";
   }
   
 
@@ -97,7 +95,7 @@ export class AppComponent {
     this.ctx.strokeStyle = this.colors[this.colorIndex];
     this.ctx.stroke();
   }
-  drawarrowline(x_len, y_len, ang) {
+  drawarrowline(x_len, y_len) {
     this.x = this.x + 5;
     this.ctx.beginPath();
     this.ctx.moveTo(this.x, this.y);
@@ -128,22 +126,28 @@ export class AppComponent {
     this.colorIndex = this.colorIndex + 1;
     this.colorIndex = this.colorIndex % this.colors.length;
     if (this.lastfromPoint == "" && this.lasttoPoint == "") {
-      this.drawcircle()
+      this.drawcircle();
     }
     else if (this.lastfromPoint === this.fromPoint && this.lasttoPoint === this.toPoint) {
-      //this.ctx.clearRect(this.x -75,this.y,80,50);
-      //this.ctx.beginPath();
       if (!this.level2 && !this.prev_level2) {
         if (this.lastfromPoint != "" && this.lasttoPoint != "") {
-          this.ctx.clearRect(this.x - 98, this.y - 10, 99, 20)
-          this.ctx.clearRect(this.x - 30, this.y, 60, 30)
+          this.ctx.clearRect(this.x - 98, this.y - 10, 99, 20);
+          this.ctx.clearRect(this.x - 30, this.y, 60, 30);
           this.x = this.x - 95;
         }
         if (!this.discontinuos_travel) {
-          this.drawline(80, 80);
-          this.drawcircle();
-          this.drawline(80, 0);
-          this.drawcircle();
+          if(this.colorIndex == 2){
+            this.x = this.x+80;
+            this.drawcircle();
+            this.drawline(80, 0);
+            this.drawcircle();
+          }else{
+            this.drawline(80, 80);
+            this.drawcircle();
+            this.drawline(80, 0);
+            this.drawcircle();
+          }
+         
         }
         else {
           this.drawline(80, 80);
@@ -156,8 +160,8 @@ export class AppComponent {
         this.prev_level2 = true;
       }
       else if (!this.level2 && this.prev_level2) {
-        this.ctx.clearRect(this.x - 98, this.y - 10, 98, 90)
-        this.ctx.clearRect(this.x - 30, this.y, 60, 30)
+        this.ctx.clearRect(this.x - 98, this.y - 10, 98, 90);
+        this.ctx.clearRect(this.x - 30, this.y, 60, 30);
         this.x = this.x - 95;
         this.y = this.y + 80;
 
@@ -168,7 +172,7 @@ export class AppComponent {
           this.drawcircle();
         }
         else {
-          this.drawarrowline(80, 0, 0);
+          this.drawarrowline(80, 0);
           this.drawcircle();
           this.drawline(80, 0);
           this.drawcircle();
@@ -181,7 +185,7 @@ export class AppComponent {
       }
       else {
         this.drawline(80, 0);
-        this.drawcircle()
+        this.drawcircle();
       }
 
     }
@@ -195,14 +199,14 @@ export class AppComponent {
       } else {
         this.drawline(80, -80);
         this.drawcircle();
-        this.level2 = false
+        this.level2 = false;
         this.prev_level2 = true;
       }
     }
     else if (this.lasttoPoint !== this.fromPoint) {
       this.discontinuos_travel = true;
       if (!this.level2) {
-        this.drawarrowline(80, 0, 0)
+        this.drawarrowline(80, 0)
         this.drawcircle();
         if (this.prev_level2) {
           this.prev_level2 = false;
@@ -214,8 +218,8 @@ export class AppComponent {
         this.prev_level2 = true;
       }
     }
-    this.lastfromPoint = this.fromPoint
-    this.lasttoPoint = this.toPoint
+    this.lastfromPoint = this.fromPoint;
+    this.lasttoPoint = this.toPoint;
   
   }
   disableAddtrip(){
