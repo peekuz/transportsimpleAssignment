@@ -121,10 +121,9 @@ export class AppComponent {
     this.ctx.fillStyle = this.colors[this.colorIndex];
     this.ctx.strokeStyle = this.colors[this.colorIndex];
     this.x = this.x + 5;
-
-
-
   }
+  
+
   addTrip() {
     this.colorIndex = this.colorIndex + 1;
     this.colorIndex = this.colorIndex % this.colors.length;
@@ -135,24 +134,16 @@ export class AppComponent {
       //this.ctx.clearRect(this.x -75,this.y,80,50);
       //this.ctx.beginPath();
       if (!this.level2 && !this.prev_level2) {
-
-          this.ctx.clearRect(this.x - 101, this.y - 10, 110, 20)
+        if (this.lastfromPoint != "" && this.lasttoPoint != "") {
+          this.ctx.clearRect(this.x - 90, this.y - 10, 95, 20)
           this.ctx.clearRect(this.x - 30, this.y, 60, 30)
-          this.x = this.x - 98;
-        
+          this.x = this.x - 90;
+        }
         if (!this.discontinuos_travel) {
-          if(this.x<100){
-            this.x =40
-            this.drawcircle();
-            this.drawline(80, 0);
-            this.drawcircle();
-          }else{
-            this.drawline(80, 80);
-            this.drawcircle();
-            this.drawline(80, 0);
-            this.drawcircle();
-          }
-         
+          this.drawline(80, 80);
+          this.drawcircle();
+          this.drawline(80, 0);
+          this.drawcircle();
         }
         else {
           this.drawline(80, 80);
@@ -165,7 +156,7 @@ export class AppComponent {
         this.prev_level2 = true;
       }
       else if (!this.level2 && this.prev_level2) {
-        this.ctx.clearRect(this.x - 99, this.y - 10, 100, 20)
+        this.ctx.clearRect(this.x - 90, this.y - 10, 95, 90)
         this.ctx.clearRect(this.x - 30, this.y, 60, 30)
         this.x = this.x - 90;
         this.y = this.y + 80;
@@ -176,7 +167,7 @@ export class AppComponent {
           this.drawline(80, 0);
           this.drawcircle();
         }
-       else{
+        else {
           this.drawarrowline(80, 0, 0);
           this.drawcircle();
           this.drawline(80, 0);
@@ -225,7 +216,14 @@ export class AppComponent {
     }
     this.lastfromPoint = this.fromPoint
     this.lasttoPoint = this.toPoint
+  
   }
-
+  disableAddtrip(){
+    if(this.fromPoint != "" && this.toPoint != ""){
+      return false;
+    }else{
+      return true;
+    }
+  }
 
 }
