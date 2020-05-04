@@ -1,6 +1,20 @@
+/* for css try */
+
+
+/* html,
+body {
+    width: 90%;
+    height: 100%;
+    margin: 0;
+} */
+
+
+/*  */
+
 .canvas-wrapper {
     width: 94%;
-    height: 500px;
+    height: 40%;
+    margin-top: 40%;
     margin: auto;
 }
 

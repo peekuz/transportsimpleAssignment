@@ -1,54 +1,53 @@
-<div class="fromTo">
-    <mat-form-field style="width: 30%; margin: 1% 16% 6% 2%;" tabindex="-1">
-        <mat-label>From</mat-label>
-        <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1" [(ngModel)]="fromPoint" name="from">
-            <input class="fromSearch" tabindex="0" matInput [(ngModel)]='searchValueFrom' placeholder="Search">
-            <button tabindex="1" mat-icon-button matSuffix (click)="onKeyFrom(searchValueFrom)" class="cursor-pointer" type="button">
+<div>
+    <div class="fromTo">
+        <mat-form-field style="width: 30%; margin: 1% 16% 6% 2%;">
+            <mat-label>From</mat-label>
+            <mat-select disableOptionCentering panelClass="myPanelClass" style="margin-top:10% ;" [(ngModel)]="fromPoint" name="from">
+                <input class="fromSearch" tabindex="0" matInput [(ngModel)]='searchValueFrom' placeholder="Search" (keydown)="$event.stopPropagation()">
+                <button tabindex="1" mat-icon-button matSuffix (click)="onKeyFrom(searchValueFrom)" class="cursor-pointer" type="button">
           <mat-icon class="search_icon">search</mat-icon>
         </button>
-            <button class="Addnewbtn" tabindex="2" mat-button (click)="showAddFrom=!showAddFrom"><mat-icon>add</mat-icon>   Add New</button>
-            <input class="Addnewinput" tabindex="3" matInput [ngClass]="{ 'hide':  showAddFrom}" [(ngModel)]='newFromPlace' placeholder="add">
-            <button class="corructbtn" tabindex="4" mat-icon-button matSuffix (click)="addPlaceFrom(newFromPlace)" [ngClass]="{ 'hide': showAddFrom }" class="cursor-pointer" type="button" style=" right: 13%;">
+                <button class="Addnewbtn" tabindex="2" mat-button (click)="showAddFrom=!showAddFrom"><mat-icon>add</mat-icon>   Add New</button>
+                <input class="Addnewinput" tabindex="3" matInput [ngClass]="{ 'hide':  showAddFrom}" [(ngModel)]='newFromPlace' placeholder="add">
+                <button class="corructbtn" tabindex="4" mat-icon-button matSuffix (click)="addPlaceFrom(newFromPlace)" [ngClass]="{ 'hide': showAddFrom }" class="cursor-pointer" type="button" style=" right: 13%;" [disabled]="this.newFromPlace.length < 3 ? true : false">
             <mat-icon class="search_icon">done</mat-icon>
             </button>
-            <button class="closebtn" tabindex="5" mat-icon-button matSuffix (click)="newFromPlace=''" [ngClass]="{ 'hide': showAddFrom }" class="cursor-pointer" type="button">
+                <button class="closebtn" tabindex="5" mat-icon-button matSuffix (click)="newFromPlace=''" [ngClass]="{ 'hide': showAddFrom }" class="cursor-pointer" type="button">
               <mat-icon class="search_icon">close</mat-icon>
               </button>
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let places of selectedFromplaces" [value]="places">{{places}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let places of selectedFromplaces" [value]="places">{{places}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
 
-    <mat-form-field style="width: 30%;" tabindex="-1">
-        <mat-label>To</mat-label>
-        <mat-select panelClass="fromSelect" style="margin-top:10% ;" tabindex="-1" [(ngModel)]="toPoint" name="food">
-            <input class="fromSearch" matInput [(ngModel)]='searchValueTo' placeholder="Search">
-            <button mat-icon-button matSuffix (click)="onKeyTo(searchValueTo)" class="cursor-pointer" type="button">
+        <mat-form-field style="width: 30%;margin-right: 9%;">
+            <mat-label>To</mat-label>
+            <mat-select panelClass="fromSelect" style="margin-top:10% ;" [(ngModel)]="toPoint" name="food">
+                <input class="fromSearch" matInput [(ngModel)]='searchValueTo' placeholder="Search">
+                <button mat-icon-button matSuffix (click)="onKeyTo(searchValueTo)" class="cursor-pointer" type="button">
         <mat-icon class="search_icon">search</mat-icon>
       </button>
-            <button class="Addnewbtn" mat-button (click)="showAddTo=!showAddTo" style="width: 100%;text-align: left;"><mat-icon>add</mat-icon>   Add New</button>
-            <input class="Addnewinput" matInput [ngClass]="{ 'hide':  showAddTo}" [(ngModel)]='newToPlace' placeholder="add">
-            <button class="corructbtn" mat-icon-button matSuffix (click)="addPlaceTo(newToPlace)" [ngClass]="{ 'hide': showAddTo }" class="cursor-pointer" type="button" style=" right: 13%;">
+                <button class="Addnewbtn" mat-button (click)="showAddTo=!showAddTo" style="width: 100%;text-align: left;"><mat-icon>add</mat-icon>   Add New</button>
+                <input class="Addnewinput" matInput [ngClass]="{ 'hide':  showAddTo}" [(ngModel)]='newToPlace' placeholder="add">
+                <button class="corructbtn" mat-icon-button matSuffix (click)="addPlaceTo(newToPlace)" [ngClass]="{ 'hide': showAddTo }" class="cursor-pointer" type="button" style=" right: 13%;" [disabled]="this.newToPlace.length < 3 ? true : false">
           <mat-icon class="search_icon">done</mat-icon>
           </button>
-            <button class="closebtn" mat-icon-button matSuffix (click)="newToPlace=''" [ngClass]="{ 'hide': showAddTo }" type="button">
+                <button class="closebtn" mat-icon-button matSuffix (click)="newToPlace=''" [ngClass]="{ 'hide': showAddTo }" type="button">
             <mat-icon class="search_icon">close</mat-icon>
             </button>
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let places of selectedToplaces" [value]="places">{{places}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let places of selectedToplaces" [value]="places">{{places}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
 
-    <button mat-icon-button matSuffix (click)="addTrip()" class="AddTrip" type="button">AddTrip
+        <button mat-icon-button matSuffix (click)="addTrip()" class="AddTrip" type="button">AddTrip
       </button>
+    </div>
+
+
+    <div style="width: 100%;">
+        <canvas #canvas id="canvas" width="1200"></canvas>
+    </div>
 </div>
-
-<div #canvasWrapper class="canvas-wrapper">
-
-    <canvas #canvas id="canvas" [height]="canvasWrapper.offsetHeight" [width]="canvasWrapper.offsetWidth"></canvas>
-</div>
-
-
-<router-outlet></router-outlet>

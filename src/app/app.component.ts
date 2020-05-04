@@ -17,11 +17,11 @@ export class AppComponent {
   lastfromPoint = ""
   lasttoPoint = ""
   x: number = 40;
-  y: number = 20;
+  y: number = 100;
   level2: boolean = false;
   prev_level2: boolean = false;
   discontinuos_travel: boolean = false;
-  states: string[] = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware'];
+  states: string[] = ['Malappuram', 'Palakkad', 'Coimbatore', 'Bangalore', 'Delhi', 'Shornur', 'Chennai', 'Mangalore'];
   selectedFromplaces = [...this.states]
   selectedToplaces = [...this.states]
   colors: string[] = ['green', 'blue', '#8C9904', '#575F02', '#69BB06', '#467F02', '#02507F', '#08027F', '#3B027F', '#2C025F', '#48025F', '#380146']
@@ -33,6 +33,8 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
+   this. ctx.canvas.width  = window.innerWidth;
+   this. ctx.canvas.height = window.innerHeight;
   }
 
   constructor() {
@@ -68,11 +70,7 @@ export class AppComponent {
     this.searchValueTo = ""
     this.newToPlace = ""
   }
-  fromValueChange(from) {
-    console.log(from)
-    this.fromPoint = from
-
-  }
+  
 
   drawcircle() {
     this.x = this.x + 5;
@@ -137,16 +135,24 @@ export class AppComponent {
       //this.ctx.clearRect(this.x -75,this.y,80,50);
       //this.ctx.beginPath();
       if (!this.level2 && !this.prev_level2) {
-        if (this.lastfromPoint != "" && this.lasttoPoint != "") {
-          this.ctx.clearRect(this.x - 98, this.y - 10, 100, 20)
+
+          this.ctx.clearRect(this.x - 101, this.y - 10, 110, 20)
           this.ctx.clearRect(this.x - 30, this.y, 60, 30)
-          this.x = this.x - 95;
-        }
+          this.x = this.x - 98;
+        
         if (!this.discontinuos_travel) {
-          this.drawline(80, 80);
-          this.drawcircle();
-          this.drawline(80, 0);
-          this.drawcircle();
+          if(this.x<100){
+            this.x =40
+            this.drawcircle();
+            this.drawline(80, 0);
+            this.drawcircle();
+          }else{
+            this.drawline(80, 80);
+            this.drawcircle();
+            this.drawline(80, 0);
+            this.drawcircle();
+          }
+         
         }
         else {
           this.drawline(80, 80);
@@ -170,7 +176,7 @@ export class AppComponent {
           this.drawline(80, 0);
           this.drawcircle();
         }
-        else {
+       else{
           this.drawarrowline(80, 0, 0);
           this.drawcircle();
           this.drawline(80, 0);
