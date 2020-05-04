@@ -135,9 +135,9 @@ export class AppComponent {
       //this.ctx.beginPath();
       if (!this.level2 && !this.prev_level2) {
         if (this.lastfromPoint != "" && this.lasttoPoint != "") {
-          this.ctx.clearRect(this.x - 90, this.y - 10, 95, 20)
+          this.ctx.clearRect(this.x - 98, this.y - 10, 99, 20)
           this.ctx.clearRect(this.x - 30, this.y, 60, 30)
-          this.x = this.x - 90;
+          this.x = this.x - 95;
         }
         if (!this.discontinuos_travel) {
           this.drawline(80, 80);
@@ -156,9 +156,9 @@ export class AppComponent {
         this.prev_level2 = true;
       }
       else if (!this.level2 && this.prev_level2) {
-        this.ctx.clearRect(this.x - 90, this.y - 10, 95, 90)
+        this.ctx.clearRect(this.x - 98, this.y - 10, 98, 90)
         this.ctx.clearRect(this.x - 30, this.y, 60, 30)
-        this.x = this.x - 90;
+        this.x = this.x - 95;
         this.y = this.y + 80;
 
         if (!this.discontinuos_travel) {
